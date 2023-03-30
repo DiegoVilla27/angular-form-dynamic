@@ -1,0 +1,60 @@
+<h1>FORM DYNAMIC</h1>
+<form
+	[formGroup]="form"
+	autocomplete="off"
+	(ngSubmit)="save()"
+>
+	<!-- INPUTS DYNAMIC -->
+	<div *ngFor="let input of data">
+		<input
+			cleanAttributes
+			[formControlName]="input.name"
+			[value]="input.value"
+			[type]="input.type"
+			[required]="input.required"
+			[placeholder]="input.placeholder"
+			[min]="input.min ?? ''"
+			[max]="input.max ?? ''"
+			[step]="input.step ?? ''"
+			[minLength]="input.minLength ?? ''"
+			[maxLength]="input.maxLength ?? ''"
+			[pattern]="input.pattern ?? ''"
+			[ngClass]="{
+				'border-green': validInput(form.get(input.name)!),
+				'border-red': invalidInput(form.get(input.name)!)
+			}"
+		/>
+		<app-error-msg
+			[list]="input.messagesError"
+			[controlRef]="form.get(input.name)!"
+		>
+		</app-error-msg>
+	</div>
+	<!-- PASSWORD CONFIRM -->
+	<div>
+		<input
+			formControlName="password_confirm"
+			type="password"
+			required
+			placeholder="Confirm password"
+			minLength="8"
+			maxLength="20"
+			[ngClass]="{
+				'border-green': validInput(form.get('password_confirm')!),
+				'border-red': invalidInput(form.get('password_confirm')!)
+			}"
+		/>
+		<app-error-msg
+			[list]="confirmPasswordErrors"
+			[controlRef]="form.get('password_confirm')!"
+		>
+		</app-error-msg>
+		<div
+			class="error-message"
+			*ngIf="form.errors?.['cannotMatch'] && (form.touched || form.dirty)"
+		>
+			<small><i>Password not equals</i></small>
+		</div>
+	</div>
+	<button type="submit">Submit</button>
+</form>

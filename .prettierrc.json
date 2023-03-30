@@ -1,0 +1,28 @@
+{
+  "trailingComma": "all",
+  "useTabs": true,
+  "tabWidth": 2,
+  "singleQuote": true,
+  "quoteProps": "preserve",
+  "jsxSingleQuote": true,
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+  "jsxBracketSameLine": false,
+  "arrowParens": "always",
+  "embeddedLanguageFormatting": "auto",
+  "singleAttributePerLine": true,
+  "overrides": [
+    {
+      "files": ["*.js", "*.ts", "*.tsx", "*.jsx"],
+      "options": {
+        "semi": true
+      }
+    },
+    {
+      "files": ["*.sass", "*.css", "*.scss"],
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
+}

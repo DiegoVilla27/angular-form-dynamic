@@ -1,0 +1,8 @@
+<div
+	*ngFor="let validation of list"
+	class="error-message"
+>
+	<small *ngIf="attrError(validation.type)">
+		<i>{{ validation.message }}</i>
+	</small>
+</div>

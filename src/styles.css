@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+input,
+select,
+button {
+	background-color: #cfcfcf;
+	border: none;
+	border-radius: 10px;
+	color: black;
+	margin: 5px;
+	outline: none;
+	padding: 8px 15px;
+	width: 180px;
+}
+
+button {
+	background-color: black;
+	color: whitesmoke;
+}
+
+.border-green {
+	border: 1px solid green;
+}
+
+.border-red {
+	border: 1px solid red;
+}
+
+.error-message {
+	color: red;
+}
