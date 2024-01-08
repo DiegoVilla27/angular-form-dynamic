@@ -1,0 +1,43 @@
+<h1>FORM</h1>
+
+<form
+  [formGroup]="form"
+  autocomplete="off"
+>
+  <ng-container *ngFor="let input of data">
+    <input
+      appCleanAttr
+      [formControlName]="input.name"
+      [value]="input.value"
+      [placeholder]="input.placeholder"
+      [type]="input.type"
+      [required]="input.required"
+      [min]="input.min ?? ''"
+      [max]="input.max ?? ''"
+      [step]="input.step ?? ''"
+      [minLength]="input.minLength ?? ''"
+      [maxLength]="input.maxLength ?? ''"
+      [pattern]="input.pattern ?? ''"
+      [ngClass]="{
+        'border-green': form.get(input.name)! | validateInput: true,
+        'border-red': form.get(input.name)! | validateInput: false
+      }"
+    />
+    <app-message-alert
+      [list]="input.messagesError"
+      [controlRef]="form.get(input.name)!"
+    >
+    </app-message-alert>
+  </ng-container>
+  <button
+    type="submit"
+    (click)="save()"
+  >
+    Enviar
+  </button>
+</form>
+
+<pre>
+  Valid: {{ form.valid }}
+  Form: {{ form.value | json }}
+</pre>
