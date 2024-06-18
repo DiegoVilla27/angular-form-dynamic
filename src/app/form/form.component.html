@@ -7,7 +7,7 @@
   <ng-container *ngFor="let input of data">
     <input
       appCleanAttr
-      appClassByStateInput
+      [appClassByStateInput]="true"
       [formControlName]="input.name"
       [value]="input.value"
       [placeholder]="input.placeholder"
