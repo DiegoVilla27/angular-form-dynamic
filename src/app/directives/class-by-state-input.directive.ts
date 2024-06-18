@@ -6,6 +6,7 @@ import { Subject, takeUntil } from "rxjs";
   selector: "[appClassByStateInput]"
 })
 export class ClassByStateInputDirective implements OnInit {
+  @Input('appClassByStateInput') loadInitialState: boolean = false;
   destroy$: Subject<void> = new Subject<void>();
 
   constructor(
@@ -15,7 +16,7 @@ export class ClassByStateInputDirective implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.initializeState();
+    if (this.loadInitialState) this.initializeState();
     this.watchStates();
   }
 
