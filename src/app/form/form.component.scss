@@ -1,0 +1,17 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.valid {
+  margin-top: 50px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  &-circle {
+    height: 20px;
+    width: 20px;
+    border-radius: 100px;
+  }
+}

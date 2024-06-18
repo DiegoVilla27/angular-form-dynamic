@@ -1,14 +1,21 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { AbstractControl } from "@angular/forms";
+import { AbstractControl, FormGroup } from "@angular/forms";
 
 @Pipe({
   name: "validateInput",
   pure: false
 })
 export class ValidateInputPipe implements PipeTransform {
-  transform(control: AbstractControl, typeValid: boolean): boolean {
-    return typeValid
-      ? control.valid && (control.dirty || control.touched)
-      : control.invalid && (control.dirty || control.touched);
+  transform(
+    form: FormGroup,
+    field: string
+  ): { valid: boolean; invalid: boolean } {
+    const control: AbstractControl | null = form.get(field);
+    if (!control) return { valid: false, invalid: false };
+
+    const isValid = control.valid && (control.dirty || control.touched);
+    const isInvalid = control.invalid && (control.dirty || control.touched);
+
+    return { valid: isValid, invalid: isInvalid };
   }
 }

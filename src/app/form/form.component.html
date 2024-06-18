@@ -7,6 +7,7 @@
   <ng-container *ngFor="let input of data">
     <input
       appCleanAttr
+      appClassByStateInput
       [formControlName]="input.name"
       [value]="input.value"
       [placeholder]="input.placeholder"
@@ -18,16 +19,13 @@
       [minLength]="input.minLength ?? ''"
       [maxLength]="input.maxLength ?? ''"
       [pattern]="input.pattern ?? ''"
-      [ngClass]="{
-        'border-green': form.get(input.name)! | validateInput: true,
-        'border-red': form.get(input.name)! | validateInput: false
-      }"
     />
-    <app-message-alert
+    <app-error-msg
+      [form]="form"
       [list]="input.messagesError"
-      [controlRef]="form.get(input.name)!"
+      [type]="input.name"
     >
-    </app-message-alert>
+    </app-error-msg>
   </ng-container>
   <button
     type="submit"
@@ -37,7 +35,13 @@
   </button>
 </form>
 
+<div class="valid">
+  VALID:
+  <div
+    class="valid-circle"
+    [ngStyle]="{ 'background-color': form.valid ? 'green' : 'red' }"
+  ></div>
+</div>
 <pre>
-  Valid: {{ form.valid }}
-  Form: {{ form.value | json }}
+  FORM: {{ form.value | json }}
 </pre>

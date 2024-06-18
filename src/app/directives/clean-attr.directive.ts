@@ -4,29 +4,25 @@ import { Directive, ElementRef } from "@angular/core";
   selector: "[appCleanAttr]"
 })
 export class CleanAttrDirective {
-  elCurrent!: HTMLElement;
-
-  constructor(private _el: ElementRef) {}
+  constructor(private el: ElementRef) {}
 
   ngAfterViewInit(): void {
-    this.elCurrent = this._el.nativeElement;
     this.cleanAttributes();
   }
 
-  cleanAttributes(): void {
-    this.conditionalAttribute("pattern") && this.removeAttribute("pattern");
-    this.conditionalAttribute("min") && this.removeAttribute("min");
-    this.conditionalAttribute("max") && this.removeAttribute("max");
-    this.conditionalAttribute("step") && this.removeAttribute("step");
-    this.conditionalAttribute("minlength") && this.removeAttribute("minlength");
-    this.conditionalAttribute("maxlength") && this.removeAttribute("maxlength");
+  private cleanAttributes(): void {
+    const elCurrent: HTMLElement = this.el.nativeElement;
+    const attributes: NamedNodeMap = elCurrent.attributes;
+
+    for (let i = attributes.length - 1; i >= 0; i--) {
+      const attribute = attributes[i];
+      if (this.isEmptyOrNull(attribute.value)) {
+        elCurrent.removeAttribute(attribute.name);
+      }
+    }
   }
 
-  conditionalAttribute(name: string): boolean {
-    return this.elCurrent.getAttribute(name) === "";
-  }
-
-  removeAttribute(name: string): void {
-    this.elCurrent.removeAttribute(name);
+  private isEmptyOrNull(value: string | null): boolean {
+    return value === null || value.trim() === "";
   }
 }

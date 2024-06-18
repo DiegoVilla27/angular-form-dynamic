@@ -1,24 +1,26 @@
+import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { FormComponent } from "./form/form.component";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
-import { MessageAlertModule } from "./components/message-alert/message-alert.module";
+import { ErrorMsgModule } from "./components/error-msg/error-msg.module";
 import { CleanAttrDirective } from "./directives/clean-attr.directive";
+import { FormComponent } from "./form/form.component";
 import { ValidateInputPipe } from "./pipes/validate-input.pipe";
+import { ClassByStateInputDirective } from "./directives/class-by-state-input.directive";
 
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
     CleanAttrDirective,
-    ValidateInputPipe
+    ValidateInputPipe,
+    ClassByStateInputDirective
   ],
   imports: [
     BrowserModule,
-    MessageAlertModule,
+    ErrorMsgModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

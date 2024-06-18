@@ -34,6 +34,7 @@ export class FormComponent {
   buildData(form: IInput[]): void {
     const controls: IControl = this.buildControls(form);
     this.form = this._fb.group<IControl>(controls);
+    this.form.markAllAsTouched();
   }
 
   buildControls(form: IInput[]): IControl {
@@ -51,12 +52,14 @@ export class FormComponent {
   buildValidations(input: IInput): ValidatorFn[] {
     const validations: ValidatorFn[] = [];
 
-    input.min && validations.push(Validators.min(input.min));
-    input.max && validations.push(Validators.max(input.max));
-    input.minLength && validations.push(Validators.minLength(input.minLength));
-    input.maxLength && validations.push(Validators.maxLength(input.maxLength));
-    input.pattern && validations.push(Validators.pattern(input.pattern));
-    input.name === "email" && validations.push(Validators.email);
+    if (input.min) validations.push(Validators.min(input.min));
+    if (input.max) validations.push(Validators.max(input.max));
+    if (input.minLength)
+      validations.push(Validators.minLength(input.minLength));
+    if (input.maxLength)
+      validations.push(Validators.maxLength(input.maxLength));
+    if (input.pattern) validations.push(Validators.pattern(input.pattern));
+    if (input.name === "email") validations.push(Validators.email);
 
     return validations;
   }

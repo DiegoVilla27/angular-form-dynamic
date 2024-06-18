@@ -1,4 +1,5 @@
 import { ValidatorFn } from "@angular/forms";
+import { IValidation } from "../components/error-msg/error-msg.component";
 
 export interface IForm {
   data: IInput[];
@@ -10,18 +11,13 @@ export interface IInput {
   placeholder: string;
   type: string;
   required: boolean;
-  messagesError: IMessagesError[];
+  messagesError: IValidation[];
   minLength?: number;
   maxLength?: number;
   pattern?: string;
   min?: number;
   max?: number;
   step?: number;
-}
-
-export interface IMessagesError {
-  type: string;
-  message: string;
 }
 
 export interface IControl {
